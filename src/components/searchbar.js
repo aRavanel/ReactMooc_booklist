@@ -12,7 +12,7 @@ class SearchBar extends Component{
 	
 	constructor(props){
 		super(props);
-		this.state = {term: ''}; // this.state.term initialise a ''
+		this.state = {term: ''}; // this.state.term initialisé a ''
 	}
 
 	// V2A
@@ -31,13 +31,20 @@ class SearchBar extends Component{
 	// V2C
 	render() {
 		return (
-			<div>
+			// la searchbar a un champ "input" qui a pour valeur un attribut de l'état (term)
+			// quand input change, on appelle la fonction onInputChange qui met a jour avec la valeur renseigée
+			<div className="search-bar">
 				<input  
 				value={this.state.term} // controlled component
-				onChange = { event => this.setState({term: event.target.value }) } />
+				onChange = { event => this.onInputChange(event.target.value) } />
 				{/* Value of the input : {this.state.term} */}
 			</div>
 		);
+	}
+
+	onInputChange(term){
+		this.setState({term});
+		this.props.onSearchTermChange(term);
 	}
 
 }
